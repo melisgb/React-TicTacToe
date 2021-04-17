@@ -59,11 +59,19 @@ class Game extends React.Component {
         const current = history[history.length-1];
         const squares = current.squares.slice();
         if(calculateWinner(squares) || squares[i]){
+            
+            /*
+            if(squares[0] != null && squares[1] != null && squares[2] != null 
+                && squares[3] != null && squares[4] != null && squares[5] != null
+                && squares[6] != null && squares[7] != null && squares[8] != null) {
+                return console.log("Tie");
+            }
+            */
             return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
-            history : history.concat([{   
+            history : history.concat([{
                 squares: squares
             }]),
             stepNumber : history.length,
@@ -74,7 +82,7 @@ class Game extends React.Component {
     jumpTo(step) {
         this.setState({
             stepNumber : step,
-            xIsNext : (step % 2) == 0,
+            xIsNext : (step % 2) === 0
         });
     }
 
@@ -98,7 +106,12 @@ class Game extends React.Component {
             status = 'Winner: ' + winner;
         }
         else {
-            status = 'Next Player: ' + (this.state.xIsNext ? 'X' : 'O');
+            if(this.state.stepNumber === 9){
+                status = 'Game ends in Tie!';
+            }
+            else {
+                status = 'Next Player: ' + (this.state.xIsNext ? 'X' : 'O');        
+            }
         }
 
         return (
