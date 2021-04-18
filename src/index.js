@@ -102,17 +102,28 @@ class Game extends React.Component {
         })
 
         let status;
+        let statusStyle;
         if(winner) {
             status = 'Winner: ' + winner;
+            statusStyle = {color: "green", backgroundColor: "powderblue", fontSize: "200%"};
         }
         else {
             if(this.state.stepNumber === 9){
                 status = 'Game ends in Tie!';
+                statusStyle = {color: "blue", backgroundColor: "yellow", fontSize: "120%"};
             }
             else {
                 status = 'Next Player: ' + (this.state.xIsNext ? 'X' : 'O');        
+                statusStyle = {color: "black", fontSize: "120%"};
             }
         }
+        // let statusStyle = { 
+        //     if(winner) {
+        //         this.setState({backgroundColor: "red"}); this.state.backgroundColor
+        //     }
+        // };
+        //<div style={statusStyle}>{status}</div>
+        //<div style={winner ? {color: "red"} : {color: "blue"}}>{status}</div>
 
         return (
             <div className="game">
@@ -122,7 +133,7 @@ class Game extends React.Component {
                     onClick = {(i) => this.handleClick(i)}/>
             </div>
             <div className="game-info">
-                <div>{status}</div>
+                <div style={statusStyle}>{status}</div>
                 <ol>{moves}</ol>
             </div>
             </div>
