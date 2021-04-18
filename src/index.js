@@ -48,6 +48,7 @@ class Game extends React.Component {
         this.state  = {
             history : [{
                 squares : Array(9).fill(null),
+                position : {row: 0, col:0}
             }],
             stepNumber : 0,
             xIsNext : true
@@ -59,20 +60,13 @@ class Game extends React.Component {
         const current = history[history.length-1];
         const squares = current.squares.slice();
         if(calculateWinner(squares) || squares[i]){
-            
-            /*
-            if(squares[0] != null && squares[1] != null && squares[2] != null 
-                && squares[3] != null && squares[4] != null && squares[5] != null
-                && squares[6] != null && squares[7] != null && squares[8] != null) {
-                return console.log("Tie");
-            }
-            */
             return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
             history : history.concat([{
-                squares: squares
+                squares: squares,
+                position : getRowCol(i + 1)
             }]),
             stepNumber : history.length,
             xIsNext : !this.state.xIsNext
@@ -90,9 +84,10 @@ class Game extends React.Component {
         const history = this.state.history;
         const current = history[this.state.stepNumber];
         const winner = calculateWinner(current.squares);
-
+        // let descDet = this.state.history[this.state.history.length-1];
+        
         const moves = history.map((step, move) => {
-            const desc = move ? 'Go to move #' + move:
+            const desc = move ? 'Go to move #' + move + "- on cell " + step.position.row + ", "+ step.position.col:
             'Go to game start';
             return (
                 <li key ={move}>
@@ -117,13 +112,6 @@ class Game extends React.Component {
                 statusStyle = {color: "black", fontSize: "120%"};
             }
         }
-        // let statusStyle = { 
-        //     if(winner) {
-        //         this.setState({backgroundColor: "red"}); this.state.backgroundColor
-        //     }
-        // };
-        //<div style={statusStyle}>{status}</div>
-        //<div style={winner ? {color: "red"} : {color: "blue"}}>{status}</div>
 
         return (
             <div className="game">
@@ -169,4 +157,20 @@ function calculateWinner(squares){
         }
     }
     return null;
+}
+
+
+function getRowCol(i){
+    var rowColDict = {
+        1 : [1, 1],
+        2 : [1, 2],
+        3 : [1, 3],
+        4 : [2, 1],
+        5 : [2, 2],
+        6 : [2, 3],
+        7 : [3, 1], 
+        8 : [3, 2], 
+        9 : [3, 3] 
+    };
+    return {row: rowColDict[i][0], col: rowColDict[i][1] };    
 }
