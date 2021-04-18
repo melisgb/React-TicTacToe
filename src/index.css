@@ -3,6 +3,10 @@ body {
     margin: 20px;
   }
   
+  li {
+    margin-bottom: 8px;
+  }
+
   ol, ul {
     padding-left: 30px;
   }
@@ -13,8 +17,10 @@ body {
     display: table;
   }
   
-  .status {
+  .statusText {
     margin-bottom: 10px;
+    text-align: center;
+    font-size: 25px;
   }
   
   .square {
@@ -49,3 +55,6 @@ body {
     margin-left: 20px;
   }
   
+  .moves {
+      font-size: 16px;
+  }

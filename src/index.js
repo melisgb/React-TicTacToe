@@ -91,7 +91,7 @@ class Game extends React.Component {
             'Go to game start';
             return (
                 <li key ={move}>
-                    <button onClick={()=> this.jumpTo(move)}>{desc}</button>
+                    <button className="moves" onClick={()=> this.jumpTo(move)}>{desc}</button>
                 </li>
             )
         })
@@ -100,16 +100,16 @@ class Game extends React.Component {
         let statusStyle;
         if(winner) {
             status = 'Winner: ' + winner;
-            statusStyle = {color: "green", backgroundColor: "powderblue", fontSize: "200%"};
+            statusStyle = {color: "green", backgroundColor: "powderblue", fontSize: "160%"};
         }
         else {
             if(this.state.stepNumber === 9){
                 status = 'Game ends in Tie!';
-                statusStyle = {color: "blue", backgroundColor: "yellow", fontSize: "120%"};
+                statusStyle = {color: "blue", backgroundColor: "yellow"};
             }
             else {
                 status = 'Next Player: ' + (this.state.xIsNext ? 'X' : 'O');        
-                statusStyle = {color: "black", fontSize: "120%"};
+                statusStyle = {color: "black"};
             }
         }
 
@@ -121,7 +121,7 @@ class Game extends React.Component {
                     onClick = {(i) => this.handleClick(i)}/>
             </div>
             <div className="game-info">
-                <div style={statusStyle}>{status}</div>
+                <div className="statusText" style={statusStyle}>{status}</div>
                 <ol>{moves}</ol>
             </div>
             </div>
