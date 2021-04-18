@@ -25,7 +25,7 @@ body {
   
   .square {
     background: #fff;
-    border: 1px solid #999;
+    border: 1px solid rgb(119, 111, 111);
     float: left;
     font-size: 32px;
     font-weight: bold;
@@ -57,4 +57,6 @@ body {
   
   .moves {
       font-size: 16px;
+      background: rgb(255, 226, 230);
+      border: 1px solid rgb(119, 111, 111);
   }
